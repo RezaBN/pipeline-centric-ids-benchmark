@@ -1,95 +1,215 @@
 # Pipeline-Centric Cross-Dataset Evaluation of Feature Reduction Strategies for Machine Learning-Based Intrusion Detection
 
-![Research Area](https://img.shields.io/badge/Research-Intrusion%20Detection-blue)
-![Machine Learning](https://img.shields.io/badge/Method-Machine%20Learning-orange)
-![Reproducibility](https://img.shields.io/badge/Focus-Reproducible%20Benchmarking-green)
-![Python](https://img.shields.io/badge/Python-3.x-yellow)
-
-
 ## Overview
 
-This repository contains the experimental framework, supplementary materials, and documentation associated with the research study:
+This repository contains the experimental framework, supplementary
+materials, and documentation associated with the research study:
 
-**Pipeline-Centric Cross-Dataset Evaluation of Feature Reduction Strategies for Machine Learning-Based Intrusion Detection**
+**Pipeline-Centric Cross-Dataset Evaluation of Feature Reduction
+Strategies for Machine Learning-Based Intrusion Detection**
 
-The study investigates the impact of feature reduction strategies on machine-learning-based intrusion detection systems through a controlled, leakage-free, and cross-dataset evaluation framework.
-
-The primary objective is to understand how different dimensionality-reduction strategies influence the effectiveness, robustness, and stability of intrusion detection pipelines when combined with different machine-learning paradigms.
+The study investigates the impact of feature reduction strategies on
+machine-learning-based intrusion detection systems through a controlled,
+leakage-free, and cross-dataset evaluation framework.
 
 The framework evaluates:
 
-- Feature Selection (FS)
-- Feature Extraction (FE)
-- Sequential Feature Selection followed by Feature Extraction (FS→FE)
-- Classical machine-learning algorithms
-- Ensemble learning methods
-- Advanced boosting approaches
-- Stacking-based meta-learning
+-   Feature Selection (FS)
+-   Feature Extraction (FE)
+-   Sequential Feature Selection followed by Feature Extraction (FS→FE)
+-   Classical machine-learning models
+-   Ensemble learning models
+-   Boosting algorithms
+-   Stacking-based meta-learning
 
+## Research Motivation
 
----
+Modern intrusion detection systems operate on high-dimensional network
+traffic data containing redundant attributes, correlated variables,
+irrelevant information, and imbalanced class distributions.
 
-# Research Motivation
+This research addresses the challenge of understanding how feature
+representation affects intrusion detection performance through a
+pipeline-centric evaluation framework separating:
 
-Modern intrusion detection systems operate on high-dimensional network traffic data containing:
+1.  Data preprocessing;
+2.  Feature reduction;
+3.  Classification;
+4.  Performance evaluation.
 
-- redundant attributes;
-- correlated variables;
-- irrelevant information;
-- imbalanced class distributions;
-- heterogeneous traffic patterns.
+## Experimental Framework
 
-Although machine-learning approaches have significantly improved intrusion detection performance, reported improvements are often difficult to interpret because feature processing, classifier selection, and dataset characteristics are frequently optimized simultaneously.
+The workflow follows:
 
-This research addresses this challenge through a **pipeline-centric evaluation framework** that separates and analyzes:
+    Raw Dataset
+         |
+         ↓
+    Data Preprocessing
+         |
+         ↓
+    Train/Test Stratified Partition
+         |
+         ↓
+    Training-Only Class Balancing
+         |
+         ↓
+    Feature Scaling
+         |
+         ↓
+    Feature Selection
+         |
+         ↓
+    Feature Extraction
+         |
+         ↓
+    Machine Learning Classifier
+         |
+         ↓
+    Performance Evaluation
 
-1. Data preprocessing;
-2. Feature representation transformation;
-3. Classification algorithms;
-4. Performance evaluation procedures.
+All data-dependent transformations are fitted exclusively using training
+data to prevent information leakage.
 
+## Datasets
 
-The goal is not only to identify high-performing classifiers, but also to understand how feature-reduction strategies affect the information available for automated intrusion detection.
+The experiments use:
 
+  Dataset           Description
+  ----------------- ---------------------------------------
+  AWID              Wireless intrusion detection dataset
+  UNSW-NB15         Modern network intrusion benchmark
+  CSE-CIC-IDS2018   Large-scale network intrusion dataset
 
----
+Raw datasets are not included due to size and licensing considerations.
 
-# Research Contributions
+## Feature Reduction Strategies
 
-The main contributions investigated in this repository are:
+### Feature Selection
 
-### 1. Pipeline-Centric Evaluation Framework
+-   Variance Threshold (VT)
+-   ANOVA F-test
+-   Chi-squared (χ²)
 
-A unified experimental pipeline is designed to evaluate feature reduction strategies independently from classifier selection.
+### Feature Extraction
 
-### 2. Cross-Dataset Benchmarking
+-   Principal Component Analysis (PCA)
+-   Linear Discriminant Analysis (LDA)
+-   Independent Component Analysis (ICA)
+-   Truncated Singular Value Decomposition (SVD)
 
-The framework evaluates intrusion detection pipelines across multiple benchmark datasets with different traffic characteristics and attack distributions.
+## Classification Models
 
-### 3. Leakage-Free Experimental Protocol
+Evaluated models include:
 
-All data-dependent operations are performed using training data only, preventing information leakage during preprocessing, feature reduction, and model development.
+### Classical Models
 
-### 4. Feature Reduction Analysis
+-   Decision Tree
+-   Logistic Regression
+-   K-Nearest Neighbors
+-   Naive Bayes
+-   Support Vector Machine
 
-The study investigates the individual and combined effects of:
+### Ensemble Models
 
-- feature selection;
-- feature extraction;
-- sequential feature selection and feature extraction.
+-   Random Forest
+-   Extra Trees
+-   Gradient Boosting
 
-### 5. Model Family Comparison
+### Advanced Boosting Models
 
-The impact of feature reduction is evaluated across multiple learning paradigms, including:
+-   XGBoost
+-   LightGBM
+-   CatBoost
 
-- classical machine learning;
-- ensemble learning;
-- gradient boosting;
-- stacking-based meta-learning.
+### Meta-Learning
 
+-   Stacking ensemble
 
----
+## Experimental Evaluation
 
-# Experimental Framework
+The framework evaluates:
 
-The complete experimental workflow follows the sequence:
+-   Cross-dataset performance;
+-   Feature reduction impact;
+-   Model-family interactions;
+-   FS-only versus FS→FE pipelines;
+-   Performance stability.
+
+Metrics include:
+
+-   Macro F1-score;
+-   Weighted F1-score;
+-   Accuracy;
+-   Macro Precision;
+-   Macro Recall.
+
+## Repository Structure
+
+    pipeline-centric-ids-benchmark/
+
+    ├── Datasets/
+    ├── Scripts/
+    │   ├── preprocessing/
+    │   ├── feature_selection/
+    │   ├── feature_extraction/
+    │   ├── models/
+    │   ├── pipelines/
+    │   ├── experiments/
+    │   ├── evaluation/
+    │   └── utils/
+    ├── Results/
+    ├── Supplementary/
+    ├── Documentation/
+    └── Notebooks/
+
+## Reproducibility
+
+The repository is designed to support reproducible computational
+experiments.
+
+The final release will provide:
+
+-   preprocessing implementations;
+-   feature reduction modules;
+-   classifier configurations;
+-   experimental scripts;
+-   evaluation procedures;
+-   supplementary documentation.
+
+The experimental protocol follows:
+
+-   fixed random seeds;
+-   leakage-free preprocessing;
+-   training-only transformation fitting;
+-   consistent evaluation across datasets and models.
+
+## Supplementary Materials
+
+Additional information will be provided in:
+
+    Supplementary/
+
+including:
+
+-   dataset descriptions;
+-   preprocessing details;
+-   feature reduction configurations;
+-   model hyperparameters;
+-   additional results;
+-   ablation-study analysis.
+
+## Citation
+
+Citation information will be added after publication.
+
+## License
+
+This repository is distributed under the license specified in:
+
+    LICENSE
+
+## Contact
+
+Reza BN
+
+GitHub: https://github.com/RezaBN
